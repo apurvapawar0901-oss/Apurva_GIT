@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Love ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+      color: #fff;
+    }
+    h1 { font-size: 2.5em; margin-bottom: 20px; }
+    .btn {
+      background: #fff; color: #ee9ca7;
+      padding: 15px 30px; border: none; border-radius: 30px;
+      font-size: 1.2em; cursor: pointer; transition: 0.3s;
+    }
+    .btn:hover { background: #ee9ca7; color: #fff; }
+    .page { display: none; }
+    .active { display: block; animation: fadeIn 2s ease-in-out; }
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    .proposal { font-size: 2em; margin-top: 20px; animation: pop 1s ease-in-out forwards; }
+    @keyframes pop { 0% {transform: scale(0);} 100% {transform: scale(1);} }
+    .heart {
+      position: absolute; width: 20px; height: 20px; background: red;
+      transform: rotate(45deg); animation: float 6s infinite;
+    }
+    .heart::before, .heart::after {
+      content: ''; position: absolute; width: 20px; height: 20px;
+      background: red; border-radius: 50%;
+    }
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: 10px; top: 0; }
+    @keyframes float {
+      0% {transform: translateY(0) rotate(45deg);}
+      100% {transform: translateY(-600px) rotate(45deg);}
+    }
+    /* Glowing name */
+    .glow {
+      font-size: 2.5em;
+      color: #fff;
+      text-shadow: 0 0 10px #ff6ec7, 0 0 20px #ff6ec7, 0 0 30px #ff6ec7;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { text-shadow: 0 0 10px #ff6ec7; }
+      50% { text-shadow: 0 0 30px #ff6ec7; }
+      100% { text-shadow: 0 0 10px #ff6ec7; }
+    }
+    /* Slideshow */
+    .slideshow {
+      max-width: 90%;
+      margin: auto;
+      position: relative;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Page 1 -->
+  <div id="page1" class="page active">
+    <h1>Good Morning, Gayatri 💖</h1>
+    <button class="btn" onclick="nextPage(2)">Begin Our Journey</button>
+  </div>
+
+  <!-- Page 2 -->
+  <div id="page2" class="page">
+    <h1 class="glow">Apurva 🌹</h1>
+    <h2>You light up my world like no one else ✨</h2>
+    <button class="btn" onclick="nextPage(3)">Continue</button>
+  </div>
+
+  <!-- Page 3 (Slideshow of memories) -->
+  <div id="page3" class="page">
+    <h1>Our Beautiful Memories 📸</h1>
+    <div class="slideshow">
+      <img class="slide" src="photo1.jpg" alt="Memory 1">
+      <img class="slide" src="photo2.jpg" alt="Memory 2">
+      <img class="slide" src="photo3.jpg" alt="Memory 3">
+    </div>
+    <button class="btn" onclick="nextPage(4)">Final Surprise</button>
+  </div>
+
+  <!-- Page 4 -->
+  <div id="page4" class="page">
+    <h1 class="proposal">You are my forever, and my greatest love. Let’s walk this journey together, hand in hand, always.!!</h1>
+    <button class="btn" onclick="nextPage(5)">Continue</button>
+  </div>
+
+  <!-- Page 5 -->
+  <div id="page5" class="page">
+    <h1 class="proposal">From the first moment I saw you, I knew my heart belonged to you. Today, I ask you to be mine forever.!!</h1>
+    <button class="btn" onclick="nextPage(6)">Final Surprise</button>
+  </div>
+
+  <!-- Page 6 -->
+  <div id="page6" class="page">
+    <h1 class="proposal">Life with you is my dream come true. Will you make it our reality, together, always...?!!</h1>
+    <audio id="song" autoplay>
+      <source src="https://pagalworld.com.se/files/download/id/64638" type="audio/mp3"> <!-- Kesariya -->
+    </audio>
+  </div>
+
+  <script>
+    function nextPage(n) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page'+n).classList.add('active');
+      if(n === 3) startSlideshow();
+      if(n === 6) {
+        for (let i = 0; i < 30; i++) {
+          let heart = document.createElement('div');
+          heart.className = 'heart';
+          heart.style.left = Math.random() * window.innerWidth + 'px';
+          heart.style.top = window.innerHeight + 'px';
+          heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 6000);
+        }
+        document.getElementById('song').play();
+      }
+    }
+
+    function startSlideshow() {
+      let slides = document.querySelectorAll('.slide');
+      let index = 0;
+      slides[index].style.display = 'block';
+      setInterval(() => {
+        slides[index].style.display = 'none';
+        index = (index + 1) % slides.length;
+        slides[index].style.display = 'block';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
